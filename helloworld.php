@@ -1,4 +1,6 @@
-soidjfosidjfpublic class helloworld.java{
+<?php
+
+public class helloworld.java{
 
 	public static void main(String[] args){
 
@@ -6,3 +8,5 @@ soidjfosidjfpublic class helloworld.java{
 	System.out.println(output);
 	}
 }
+
+?>
