@@ -5,7 +5,7 @@ var app = express();
 app.get('/', function(req, res) {
 	var request = require('request');
 	var query = req.query['search'] || 'comedy';
-	var time_remaining = req.query['duration'] || '300';
+	var time_remaining = req.query['time'] || '300';
 	
 	if (time_remaining < 240)
 		duration = 'short';
@@ -14,7 +14,9 @@ app.get('/', function(req, res) {
 	else
 		duration = 'long';
 	
-	request('https://gdata.youtube.com/feeds/api/videos?alt=json&q='+query+'&duration='+duration+'&v=2', function (error, response, body) {
+	var req_url = 'https://gdata.youtube.com/feeds/api/videos?alt=json&q='+query+'&duration='+duration+'&v=2';
+	console.log('Making a request to: '+req_url);
+	request(req_url, function (error, response, body) {
 		if (!error && response.statusCode == 200) {
 			//get json data
 			var json = JSON.parse(body);
@@ -22,17 +24,25 @@ app.get('/', function(req, res) {
 			//determine what to output
 			var videos = json.feed.entry;
 			var page = "<ul>";
+			var matches = 0;
 			for (var i = 0; i < videos.length; i++)
 			{
-				var video = videos[i];
-				var duration = video['media$group']['yt$duration']['seconds'];
-				var title = video['title']['$t'];
-				var link = video['link'][0]['href'];
+				var v = videos[i];
+				var video = {};
+				video.duration = v['media$group']['yt$duration']['seconds'];
+				video.title = v['title']['$t'];
+				video.link = v['link'][0]['href'];
 				
-				console.log(duration, title, link);
-				
-				page += "<li><a href='"+link+"'>"+title+"</a> - "+duration+" seconds</li>";
+				var idle_time = parseInt(time_remaining) - parseInt(video.duration);
+				if (idle_time > 0 && idle_time < 60)
+				{
+					//console.log(video.duration, video.title, video.link);
+					page += "<li><a href='"+video.link+"'>"+video.title+"</a> - "+video.duration+" seconds</li>";
+					matches++;
+				}
 			}
+			if (matches == 0)
+				page = "<li>No videos found.</li>"
 			page += "</ul>";
 			res.send(page);
 		}
