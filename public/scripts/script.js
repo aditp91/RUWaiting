@@ -10,7 +10,7 @@ function begin()
 	  	var lat = position.coords.latitude;
 	    var lng = position.coords.longitude;
 			
-			$.ajax('nearby/?lat='+lat+'&lng='+lng, {
+			$.ajax('nearby/?lat='+lat+'&lon='+lng, {
 				success: function(data, status, xhr) {
 					console.log(data);					
 				}
