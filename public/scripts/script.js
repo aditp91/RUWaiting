@@ -16,7 +16,8 @@ function begin()
 					//data = ['College Hall', 'Scott Hall', 'Trayes Hall'];
 					for (i=0;i<data.length;i++){
 					   $('<option/>').val(data[i]).html(data[i]).appendTo('#stop');
-					}				
+					}
+					$('#stop').trigger('change');
 				}
 			});
 			
@@ -25,6 +26,7 @@ function begin()
 					success: function(data, status, xhr) {
 						console.log(data);		
 						//data = [{title: 'EE', seconds: '100'}, {title: 'A', seconds: '340'}];
+						$('#bus').empty();
 						for (i=0;i<data.length;i++){
 						   $('<option/>').val(data[i].seconds).html(data[i].title).appendTo('#bus');
 						}
