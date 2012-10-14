@@ -2,44 +2,98 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta name="description" content="">
 	<meta name="keywords" content="">
 	<link rel="icon" type="image/x-icon" href="/favicon.ico" />
 	
-	<link rel="stylesheet" type="text/css" href="styles/reset.css" media="screen" />
 	<link rel="stylesheet" type="text/css" href="style.css" media="screen" />
+	<link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/jquery.mobile/1.1.1/jquery.mobile-1.1.1.min.css" />
+    <link rel="stylesheet" href="styles/my.css" />
 	
 	<!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/mootools/1.4.5/mootools.js"></script> -->
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js">
+    </script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.mobile/1.1.1/jquery.mobile-1.1.1.min.js">
+    </script>
+	<script type="text/javascript" src="scripts/my.js"></script>
 	<script type="text/javascript" src="scripts/script.js"></script>
 
-	<title>HACKRU</title>
+	<title>RU Waiting</title>
 </head>
 
 <body>
-	<h1>Website</h1>
-	<form method='get' action='/youtube'>
-		<p>
-			<label for='stop'>Choose bus stop: </label>
-			<select id='stop'>
-				
-			</select>
-		</p>
-		<p>
-			<label for='bus'>Choose bus: </label>
-			<select id='bus' name='time'>
-			</select>
-		</p>
-		<p>
-			Category:
-			<label><input type="radio" name="category" value="cats" checked>Cats</label>
-			<label><input type="radio" name="category" value="music">Music</label>
-			<label><input type="radio" name="category" value="sports">Sports</label>
-			<label><input type="radio" name="category" value="funny">Funny</label>
-		</p>
-		<p>
-			<input type='submit' value='Search' />
-		</p>
+	<form method='get' action='/youtube' data-ajax="false" >
+	<div data-role="page" id="page1">
+        <div data-theme="c" data-role="header">
+            <h3>
+                RU Waiting
+            </h3>
+        </div>
+		<div data-role="content">
+            <div data-role="fieldcontain">
+                <label for="stop">
+                    Choose Bus Stop:
+                </label>
+                <select name="" id='stop'>
+                </select>
+            </div>
+            <div data-role="fieldcontain">
+                <label for="bus">
+                    Choose Bus:
+                </label>
+                <select id='bus' name="time">
+                </select>
+            </div>
+            <div data-role="fieldcontain">
+                <fieldset data-role="controlgroup" data-type="vertical" data-mini="true">
+                    <legend>
+                        Video Category:
+                    </legend>
+                    <input id='cats' name="category" checked value="cats" type="radio" />
+                    <label for="cats">
+                        Cat
+                    </label>
+                    <input id='music' name="category" value="music" type="radio" />
+                    <label for="music">
+                        Music
+                    </label>
+                    <input id='sports' name="category" value="sports" type="radio" />
+                    <label for="sports">
+                        Sports
+                    </label>
+                    <input id='funny' name="category" value="funny" type="radio" />
+                    <label for="funny">
+                        Funny
+                    </label>
+                </fieldset>
+            </div>
+            <div data-role="fieldcontain">
+                <fieldset data-role="controlgroup" data-type="vertical" data-mini="true">
+                    <legend>
+                        News Category:
+                    </legend>
+                    <input id="tech" name="" value="tech" type="radio" />
+                    <label for="tech">
+                        Tech
+                    </label>
+                    <input id="money" name="" value="money" type="radio" />
+                    <label for="money">
+                        Money
+                    </label>
+                    <input id="nfl" name="" value="nfl" type="radio" />
+                    <label for="nfl">
+                        NFL
+                    </label>
+                </fieldset>
+            </div>
+            <!--<a data-role="button" data-theme="e" href="#page1" data-icon="search" data-iconpos="left">
+                Search
+            </a>
+			-->
+			<input type='submit' value='Search' data-theme="e" data-icon="search" data-iconpos="left" />
+        </div>
+
 	</form>
 </body>
 </html>
