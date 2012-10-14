@@ -9,14 +9,37 @@
 	<link rel="stylesheet" type="text/css" href="styles/reset.css" media="screen" />
 	<link rel="stylesheet" type="text/css" href="style.css" media="screen" />
 	
-	
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/mootools/1.4.1/mootools.js"></script>	
+	<!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/mootools/1.4.5/mootools.js"></script> -->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 	<script type="text/javascript" src="scripts/script.js"></script>
 
-	<title>Template</title>
+	<title>HACKRU</title>
 </head>
 
 <body>
-	
+	<h1>Website</h1>
+	<form method='get' action='/youtube'>
+		<p>
+			<label for='stop'>Choose bus stop: </label>
+			<select id='stop'>
+				
+			</select>
+		</p>
+		<p>
+			<label for='bus'>Choose bus: </label>
+			<select id='bus' name='time'>
+			</select>
+		</p>
+		<p>
+			Category:
+			<label><input type="radio" name="category" value="cats" checked>Cats</label>
+			<label><input type="radio" name="category" value="music">Music</label>
+			<label><input type="radio" name="category" value="sports">Sports</label>
+			<label><input type="radio" name="category" value="sports">Funny</label>
+		</p>
+		<p>
+			<input type='submit' value='Search' />
+		</p>
+	</form>
 </body>
 </html>

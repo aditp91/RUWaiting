@@ -1,10 +1,25 @@
 var express = require('express');
 var app = express();
 
+app.all('/', function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
 
-app.get('/', function(req, res) {
+	app.use(express.methodOverride());
+  app.use(express.bodyParser());
+  app.use(express.static(__dirname + '/public'));
+  app.use(express.errorHandler({
+    dumpExceptions: true, 
+    showStack: true
+  }));
+  app.use(app.router);
+
+  next();
+});
+
+app.get('/youtube', function(req, res) {
 	var request = require('request');
-	var query = req.query['search'] || 'comedy';
+	var query = req.query['category'] || 'cats';
 	var time_remaining = req.query['time'] || '300';
 	
 	if (time_remaining < 240)
