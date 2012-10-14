@@ -40,7 +40,6 @@ app.get('/youtube', function(req, res) {
 	page += "<script type='text/javascript' src='scripts/jquery.countdown.js'></script>";
 	page += "<style type='text/css'>.cntSeparator { font-size: 54px; margin: 10px 7px; color: black;} </style>";
 	page += "<script>$( function() {$('#counter').countdown({ image: 'images/digits.png', startTime: '"+minutes+":"+seconds_left+"', timerEnd: function(){  }, format: 'mm:ss' });";
-	page += "$('li a').click(function(e) {e.preventDefault(); $('#video').attr('src', 'http://www.youtube.com/embed/'+$(this).attr('rel-id')); })";
 	page +="});</script>";
 	page += '</head><body>'
 	page += "<div id='counter'></div>";
@@ -54,6 +53,8 @@ app.get('/youtube', function(req, res) {
 				var json = JSON.parse(body);
 				var stories = json.stories;
 				console.log(stories.length);
+				page += "<script>$(function() { $('li a').click(function(e) {e.preventDefault(); $('#news').attr('src', $(this).attr('href')); }) });</script>";
+				
 				page += "<ul>";
 				var matches = 0;
 				for (var i = 0; i < 10; i++)
@@ -102,6 +103,7 @@ app.get('/youtube', function(req, res) {
 				    return parseInt(b['media$group']['yt$duration']['seconds']) - parseInt(a['media$group']['yt$duration']['seconds']);
 				});
 				
+				page += "<script>$(function() { $('li a').click(function(e) {e.preventDefault(); $('#video').attr('src', 'http://www.youtube.com/embed/'+$(this).attr('rel-id')); })  });</script>";
 				page += "<ul>";
 			
 				for (var i = 0; i < videos.length; i++)
