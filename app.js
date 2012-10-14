@@ -15,8 +15,6 @@ app.all('/*', function(req, res, next) {
     showStack: true
   }));
   app.use(app.router);
-
-
   next();
 });
 
@@ -47,12 +45,18 @@ app.get('/youtube', function(req, res) {
 				minutes = "0" + minutes;
 			if (seconds_left < 10)
 			        seconds_left = "0" + seconds_left;
-			var page = '<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>';
+			var page = '<!doctype html>';
+			page += '<html lang="en"><head><meta charset="utf-8">';
+			page += '<meta name="viewport" content="width=device-width, initial-scale=1" />';
+			page += '<link rel="stylesheet" type="text/css" href="style.css" media="screen" /></head>';
+								
+			page += '<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>';
 			page += "<script type='text/javascript' src='scripts/jquery.countdown.js'></script>";
 			page += "<style type='text/css'>.cntSeparator { font-size: 54px; margin: 10px 7px; color: black;} </style>";
 			page += "<script>$( function() {$('#counter').countdown({ image: 'images/digits.png', startTime: '"+minutes+":"+seconds_left+"', timerEnd: function(){  }, format: 'mm:ss' });";
 			page += "$('li a').click(function(e) {e.preventDefault(); $('#video').attr('src', 'http://www.youtube.com/embed/'+$(this).attr('rel-id')); })";
 			page +="});</script>";
+			page += '</head><body>'
 			page += "<div id='counter'></div><ul>";
 			
 			var matches = 0;
@@ -83,7 +87,7 @@ app.get('/youtube', function(req, res) {
 			}
 			if (matches == 0)
 				page = "<li>No videos found.</li>"
-			page += "</ul>";
+			page += "</ul></body>";
 			res.send(page);
 		}
 	});
