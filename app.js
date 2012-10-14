@@ -33,14 +33,13 @@ app.get('/youtube', function(req, res) {
 	
 	var page = '<!doctype html>';
 	page += '<html lang="en"><head><meta charset="utf-8">';
-	page += '<meta name="viewport" content="width=device-width, initial-scale=1" />';
+	page += '<meta name="viewport" content="width=device-width, initial-scale=1", maximum-scale=1, user-scalable=0 />';
 	page += '<link rel="stylesheet" type="text/css" href="style.css" media="screen" /></head>';
 					
 	page += '<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>';
 	page += "<script type='text/javascript' src='scripts/jquery.countdown.js'></script>";
 	page += "<style type='text/css'>.cntSeparator { font-size: 54px; margin: 10px 7px; color: black;} </style>";
 	page += "<script>$( function() {$('#counter').countdown({ image: 'images/digits.png', startTime: '"+minutes+":"+seconds_left+"', timerEnd: function(){  }, format: 'mm:ss' });";
-	page += "$('li a').click(function(e) {e.preventDefault(); $('#video').attr('src', 'http://www.youtube.com/embed/'+$(this).attr('rel-id')); })";
 	page +="});</script>";
 	page += '</head><body>'
 	page += "<div id='counter'></div>";
@@ -54,7 +53,9 @@ app.get('/youtube', function(req, res) {
 				var json = JSON.parse(body);
 				var stories = json.stories;
 				console.log(stories.length);
-				var page = "<ul>";
+				page += "<script>$(function() { $('li a').click(function(e) {e.preventDefault(); $('#news').attr('src', $(this).attr('href')); }) });</script>";
+				
+				page += "<ul>";
 				var matches = 0;
 				for (var i = 0; i < 10; i++)
 				{
@@ -62,12 +63,17 @@ app.get('/youtube', function(req, res) {
 					var story = v.title;
 					var link = v.link;
 					console.log(story);
+					
+					if (matches == 0)
+						page += "<iframe id='news' src='"+v.link+"' width='320' height='400'></iframe>";
+					
+					
 					page += "<li><a href='"+link+"'>"+story+"</a></li>";
 					matches++;
 				}
 				if (matches == 0)
 					page = "<li>No stories found.</li>"
-				page += "</ul>";
+				page += "</ul></body>";
 				res.send(page);
 		  }
 		});
@@ -97,6 +103,7 @@ app.get('/youtube', function(req, res) {
 				    return parseInt(b['media$group']['yt$duration']['seconds']) - parseInt(a['media$group']['yt$duration']['seconds']);
 				});
 				
+				page += "<script>$(function() { $('li a').click(function(e) {e.preventDefault(); $('#video').attr('src', 'http://www.youtube.com/embed/'+$(this).attr('rel-id')); })  });</script>";
 				page += "<ul>";
 			
 				for (var i = 0; i < videos.length; i++)
