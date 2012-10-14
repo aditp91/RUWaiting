@@ -9,7 +9,7 @@
 	
 	<link rel="stylesheet" type="text/css" href="style.css" media="screen" />
 	<link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/jquery.mobile/1.1.1/jquery.mobile-1.1.1.min.css" />
-    <link rel="stylesheet" href="styles/my.css" />
+    <link rel="stylesheet" href="jquery/themes/redGold.min.css" />
 	
 	<!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/mootools/1.4.5/mootools.js"></script> -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js">
@@ -25,21 +25,21 @@
 <body>
 	<form method='get' action='/youtube' data-ajax="false" >
 	<div data-role="page" id="page1">
-        <div data-theme="c" data-role="header">
+        <div data-theme="c" data-role="header" style="background-color:#999999">
             <h3>
                 RU Waiting
             </h3>
         </div>
-		<div data-role="content">
+		<div data-role="content" style="background-color:#7A0000">
             <div data-role="fieldcontain">
-                <label for="stop">
+                <label style="color:#FFE271; text-shadow: black 0.2em 0.3em 0.2em" for="stop">
                     Choose Bus Stop:
                 </label>
                 <select name="" id='stop'>
                 </select>
             </div>
             <div data-role="fieldcontain">
-                <label for="bus">
+                <label style="color:#FFE271; text-shadow: black 0.2em 0.3em 0.2em" for="bus">
                     Choose Bus:
                 </label>
                 <select id='bus' name="time">
@@ -48,7 +48,9 @@
             <div data-role="fieldcontain">
                 <div data-role="controlgroup" data-type="vertical" data-mini="true">
                     <legend>
-                        Video Category:
+                        <span style="color:#FFE271; text-shadow: black 0.2em 0.3em 0.2em">
+                            Video Category:
+                        </span>
                     </legend>
                     <input id='cats' name="category" checked value="cats" type="radio" />
                     <label for="cats">
@@ -71,7 +73,9 @@
             <div data-role="fieldcontain">
                 <div data-role="controlgroup" data-type="vertical" data-mini="true">
                     <legend>
-                        News Category:
+                        <span style="color:#FFE271; text-shadow: black 0.2em 0.3em 0.2em">
+                            News Category:
+                        </span>
                     </legend>
                     <input id="tech" name="category" value="tech" type="radio" />
                     <label for="tech">
