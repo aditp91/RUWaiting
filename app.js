@@ -42,7 +42,7 @@ app.get('/youtube', function(req, res) {
 
 			//determine what to output
 			var videos = json.feed.entry;
-			var page = "<ul>";
+			var page = "<h1>You have "+time_remaining+" seconds until the bus gets here!</h1><ul>";
 			var matches = 0;
 			
 			videos.sort(function(a, b) { 
