@@ -44,6 +44,11 @@ app.get('/youtube', function(req, res) {
 			var videos = json.feed.entry;
 			var page = "<ul>";
 			var matches = 0;
+			
+			videos.sort(function(a, b) { 
+			    return parseInt(b['media$group']['yt$duration']['seconds']) - parseInt(a['media$group']['yt$duration']['seconds']);
+			})
+			
 			for (var i = 0; i < videos.length; i++)
 			{
 				var v = videos[i];
@@ -51,11 +56,15 @@ app.get('/youtube', function(req, res) {
 				video.duration = v['media$group']['yt$duration']['seconds'];
 				video.title = v['title']['$t'];
 				video.link = v['link'][0]['href'];
+				video.id = v['media$group']['yt$videoid']['$t'];
 				
 				var idle_time = parseInt(time_remaining) - parseInt(video.duration);
-				if (idle_time > 0 && idle_time < 60)
+				if (idle_time > 0)
 				{
 					//console.log(video.duration, video.title, video.link);
+					if (matches == 0)
+						page += "<iframe src='http://www.youtube.com/embed/"+video.id+"' width='320' height='190'></iframe>";
+					
 					page += "<li><a href='"+video.link+"'>"+video.title+"</a> - "+video.duration+" seconds</li>";
 					matches++;
 				}
