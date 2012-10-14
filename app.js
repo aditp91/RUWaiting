@@ -77,15 +77,14 @@ app.get('/youtube', function(req, res) {
 	});
 });
 
+request('https://rumobile.rutgers.edu/0.1/rutgersrouteconfig.txt', function (err, data, body) {
+	if (err) return console.dir(error)
+	rutgers.setAgencyCache((JSON.parse(body)), 'rutgers');
+});
+
 app.get('/nearby', 
 	function(req, res)
-	{
-		
-		request('https://rumobile.rutgers.edu/0.1/rutgersrouteconfig.txt', function (err, data, body) {
-			if (err) return console.dir(error)
-			rutgers.setAgencyCache((JSON.parse(body)), 'rutgers');
-		});
-		
+	{	
 		var lat = req.query['lat'];
 		var lon = req.query['lon'];
 
@@ -104,12 +103,7 @@ app.get('/nearby',
 app.get('/buses', 
 	function(req, res)
 	{
-		
-		request('https://rumobile.rutgers.edu/0.1/rutgersrouteconfig.txt', function (err, data, body) {
-			if (err) return console.dir(error)
-			rutgers.setAgencyCache((JSON.parse(body)), 'rutgers');
-		});
-		
+	
 		/* query for bus stops and parse */
 		var query = req.query['stop'];
 		//console.log(query);
