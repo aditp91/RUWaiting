@@ -30,6 +30,7 @@ function begin()
 						for (i=0;i<data.length;i++){
 						   $('<option/>').val(data[i].seconds).html(data[i].title).appendTo('#bus');
 						}
+						$('#bus').selectmenu("refresh");
 					}
 				});
 			});

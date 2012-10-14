@@ -4,11 +4,10 @@ var request = require('request');
 var nextbusjs = require('nextbusjs');
 var rutgers = nextbusjs.client();
 
-app.all('/', function(req, res, next) {
+app.all('/*', function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "X-Requested-With");
-
-	app.use(express.methodOverride());
+  app.use(express.methodOverride());
   app.use(express.bodyParser());
   app.use(express.static(__dirname + '/public'));
   app.use(express.errorHandler({
@@ -42,12 +41,25 @@ app.get('/youtube', function(req, res) {
 
 			//determine what to output
 			var videos = json.feed.entry;
-			var page = "<h1>You have "+time_remaining+" seconds until the bus gets here!</h1><ul>";
+			var minutes = Math.floor(time_remaining / 60);
+			var seconds_left = time_remaining % 60;
+			if (minutes < 10)
+				minutes = "0" + minutes;
+			if (seconds_left < 10)
+			        seconds_left = "0" + seconds_left;
+			var page = '<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>';
+			page += "<script type='text/javascript' src='scripts/jquery.countdown.js'></script>";
+			page += "<style type='text/css'>.cntSeparator { font-size: 54px; margin: 10px 7px; color: black;} </style>";
+			page += "<script>$( function() {$('#counter').countdown({ image: 'images/digits.png', startTime: '"+minutes+":"+seconds_left+"', timerEnd: function(){  }, format: 'mm:ss' });";
+			page += "$('li a').click(function(e) {e.preventDefault(); $('#video').attr('src', 'http://www.youtube.com/embed/'+$(this).attr('rel-id')); })";
+			page +="});</script>";
+			page += "<div id='counter'></div><ul>";
+			
 			var matches = 0;
 			
 			videos.sort(function(a, b) { 
 			    return parseInt(b['media$group']['yt$duration']['seconds']) - parseInt(a['media$group']['yt$duration']['seconds']);
-			})
+			});
 			
 			for (var i = 0; i < videos.length; i++)
 			{
@@ -63,9 +75,9 @@ app.get('/youtube', function(req, res) {
 				{
 					//console.log(video.duration, video.title, video.link);
 					if (matches == 0)
-						page += "<iframe src='http://www.youtube.com/embed/"+video.id+"' width='320' height='190'></iframe>";
+						page += "<iframe id='video' src='http://www.youtube.com/embed/"+video.id+"' width='320' height='190'></iframe>";
 					
-					page += "<li><a href='"+video.link+"'>"+video.title+"</a> - "+video.duration+" seconds</li>";
+					page += "<li><a rel-id='"+video.id+"' href='"+video.link+"'>"+video.title+"</a> - "+video.duration+" seconds</li>";
 					matches++;
 				}
 			}
