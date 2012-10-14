@@ -103,7 +103,6 @@ app.get('/nearby',
 app.get('/buses', 
 	function(req, res)
 	{
-	
 		/* query for bus stops and parse */
 		var query = req.query['stop'];
 		//console.log(query);
