@@ -3,7 +3,22 @@ body {
 }
 
 a, a:visited {
-	
+	font-weight: bold;
+	color: maroon;
+}
+
+ul {
+	padding: 0;	
+}
+
+#counter {
+	width: 250px;
+	margin: 0 auto;
+}
+
+#video {
+	width: 100%
+	margin
 }
 
 a:hover, a:active {

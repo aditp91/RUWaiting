@@ -81,7 +81,9 @@ app.get('/youtube', function(req, res) {
 					if (matches == 0)
 						page += "<iframe id='video' src='http://www.youtube.com/embed/"+video.id+"' width='320' height='190'></iframe>";
 					
-					page += "<li><a rel-id='"+video.id+"' href='"+video.link+"'>"+video.title+"</a> - "+video.duration+" seconds</li>";
+					var vm = Math.floor(video.duration / 60);
+					var vs = video.duration % vm;
+					page += "<li><a rel-id='"+video.id+"' href='"+video.link+"'>"+video.title+"</a> - "+vm+"m, "+vs+"s</li>";
 					matches++;
 				}
 			}
