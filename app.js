@@ -33,7 +33,7 @@ app.get('/youtube', function(req, res) {
 	
 	var page = '<!doctype html>';
 	page += '<html lang="en"><head><meta charset="utf-8">';
-	page += '<meta name="viewport" content="width=device-width, initial-scale=1" />';
+	page += '<meta name="viewport" content="width=device-width, initial-scale=1", maximum-scale=1, user-scalable=0 />';
 	page += '<link rel="stylesheet" type="text/css" href="style.css" media="screen" /></head>';
 					
 	page += '<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>';
@@ -54,7 +54,7 @@ app.get('/youtube', function(req, res) {
 				var json = JSON.parse(body);
 				var stories = json.stories;
 				console.log(stories.length);
-				var page = "<ul>";
+				page += "<ul>";
 				var matches = 0;
 				for (var i = 0; i < 10; i++)
 				{
@@ -62,12 +62,17 @@ app.get('/youtube', function(req, res) {
 					var story = v.title;
 					var link = v.link;
 					console.log(story);
+					
+					if (matches == 0)
+						page += "<iframe id='news' src='"+v.link+"' width='320' height='400'></iframe>";
+					
+					
 					page += "<li><a href='"+link+"'>"+story+"</a></li>";
 					matches++;
 				}
 				if (matches == 0)
 					page = "<li>No stories found.</li>"
-				page += "</ul>";
+				page += "</ul></body>";
 				res.send(page);
 		  }
 		});
