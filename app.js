@@ -191,5 +191,5 @@ app.get('/buses',
 );
 
 var PORTNUMBER = 1440;
-app.listen(PORTNUMBER);
+app.listen(process.env.PORT || PORTNUMBER);
 console.log('Listening on port '+PORTNUMBER);
