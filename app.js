@@ -190,6 +190,6 @@ app.get('/buses',
 	}
 );
 
-var PORTNUMBER = 3000;
+var PORTNUMBER = 1440;
 app.listen(PORTNUMBER);
 console.log('Listening on port '+PORTNUMBER);

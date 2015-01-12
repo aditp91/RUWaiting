@@ -2,7 +2,7 @@
   "name": "ruwaiting",
   "subdomain": "ruwaiting",
   "scripts": {
-    "start": "app.js"
+    "start": "node app.js"
   },
   "version": "0.0.1-9",
   "engines": {
